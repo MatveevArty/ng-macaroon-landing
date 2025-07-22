@@ -1,62 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdvantageType} from "./type/advantage.type";
 import {ProductCardType} from "./type/product-card.type";
+import {ProductService} from "./services/product.service";
+import {AdvantageService} from "./services/advantage.service";
+import {CartService} from "./services/cart.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   /**
    * Поля карточек преимуществ
    */
-  public advantages: AdvantageType[] = [
-    {
-      title: 'Лучшие продукты',
-      description: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.',
-    },
-    {
-      title: 'Много вкусов',
-      description: 'Наша задача – предоставить вам широкое разнобразие вкусов. Вы удивитесь, но у нас более 70 вкусов пироженок.',
-    },
-    {
-      title: 'Бисквитное тесто',
-      description: 'Все пирожные готовятся на бисквитном тесте с качественным сливочным маслом 82,5%. В составе нет маргарина и дрожжей!',
-    },
-    {
-      title: 'Честный продукт',
-      description: 'Вкус, качество и безопасность наших пирогов подтверждена декларацией о соответствии, которую мы получили 22.06.2016 г.',
-    },
-
-
-  ]
+  public advantages: AdvantageType[] = [];
 
   /**
    * Поля карточек макарунов
    */
-  public productCards: ProductCardType[] = [
-    {
-      imageLink: 'macaroon1.png',
-      name: 'Макарун с малиной',
-      price: '1,70 руб.',
-    },
-    {
-      imageLink: 'macaroon2.png',
-      name: 'Макарун с манго',
-      price: '1,70 руб.',
-    },
-    {
-      imageLink: 'macaroon3.png',
-      name: 'Пирог с ванилью',
-      price: '1,70 руб.',
-    },
-    {
-      imageLink: 'macaroon4.png',
-      name: 'Пирог с фисташками',
-      price: '1,70 руб.',
-    },
-  ]
+  public productCards: ProductCardType[] = []
 
   /**
    * Данные формы заказа
@@ -75,12 +39,21 @@ export class AppComponent {
   /**
    * Номер телефона магазина
    */
-  public shopPhoneNumber: string = '+375 (29) 368-98-68';
+  public shopPhoneNumber: string = '375293689868';
 
   /**
    * Ссылка на сайт магазина
    */
   public instagramLink: string = 'https://donmacaron.ru/main';
+
+  constructor(private _productService: ProductService,
+              private _advantageService: AdvantageService,
+              public cartService: CartService,) {}
+
+  ngOnInit() {
+    this.productCards = this._productService.getProducts();
+    this.advantages = this._advantageService.getAdvantages();
+  }
 
   /**
    * Скролл к элементу
@@ -91,13 +64,13 @@ export class AppComponent {
   }
 
   /**
-   * Скролл к элементу с добавлением названия макаруна с caps-lock в форму заказа
-   * @param productCard Карточка макаруна
-   * @param target
+   * Добавление товара в корзину с увеличением числа товаров и суммы чека
+   * @param productCard Карточка товара
    */
-  public addToCart(productCard: ProductCardType, target: HTMLElement): void {
-    this.scrollTo(target);
-    this.formValues.productTitle = productCard.name.toUpperCase();
+  public addToCart(productCard: ProductCardType): void {
+    this.cartService.count++;
+    this.cartService.total = this.cartService.total + productCard.price;
+    alert(`${productCard.name} добавлен в корзину!`);
   }
 
   /**

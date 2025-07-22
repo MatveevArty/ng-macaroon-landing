@@ -38,3 +38,29 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+
+/* Кнопки */
+.btn {
+  background: linear-gradient(0deg, rgb(113,8,30) 0%, rgb(215,72,92) 100%);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  /* анимация */
+  transition: all 0.5s ease
+}
+
+.main__btn {
+  border-radius: 30px;
+  width: 240px;
+  box-sizing: border-box;
+  padding: 21px;
+  /*  текст  */
+  font-family: 'Gilroy-Bold', sans-serif;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+}
+
+.btn:hover {
+  box-shadow: 0 5px 9px 1px rgba(130, 19, 40, 0.5);
+}
+

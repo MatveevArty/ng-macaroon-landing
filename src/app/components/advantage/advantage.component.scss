@@ -1,0 +1,54 @@
+.culture__step {
+  max-width: 220px;
+}
+
+.culture__step-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #821328;
+  position: relative;
+  /* анимация */
+  transition: all 0.5s ;
+}
+
+.culture__step-circle-number {
+  font-family: 'Gilroy-ExtraBold', sans-serif;
+  font-size: 60px;
+  color: white;
+  line-height: 1;
+  position: absolute;
+  bottom: -15%;
+  left: 30%;
+  /* анимация */
+  transition: all 0.5s ease;
+}
+
+.culture__step:hover .culture__step-circle  {
+  background-color: #eba8b1;
+}
+
+.culture__step:hover .culture__step-circle-number  {
+  color: #821328;
+}
+
+.culture__step-title {
+  font-family: "Gilroy-ExtraBold", sans-serif;
+  font-size: 20px;
+  color: rgb(51, 25, 7);
+  margin-top: 13px;
+}
+
+.culture__step-text {
+  font-family: 'Gilroy-Medium', sans-serif;
+  font-size: 15px;
+  color: rgb(51, 25, 7);
+  line-height: 1.333;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1023px) {
+  .culture__step-circle {
+    margin: 0 auto;
+  }
+}

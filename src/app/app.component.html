@@ -38,7 +38,7 @@
       </ul>
     </nav>
 
-    <div class="phone header__phone">{{ shopPhoneNumber }}</div>
+    <div class="phone header__phone">{{ shopPhoneNumber | phonePretty: 'BY' }}</div>
 
     <div class="header__burger" id="burger">
       <svg enable-background="new 0 0 512 512" height="40" viewBox="0 0 512 512" width="40"
@@ -63,7 +63,7 @@
       </div>
 
       <div class="main__action">
-        <button class="btn main__btn" (click)="scrollTo(productsSection)">Выбрать макарун</button>
+        <button class="btn main__btn" (click)="scrollTo(productsSection)" sexyButton [sexyBtnDefaultColor]="'deeppink'" [sexyBtnOnHoverColor]="'darkviolet'">Выбрать макарун</button>
       </div>
     </div>
 
@@ -95,15 +95,7 @@
     </div>
 
     <div class="culture__steps">
-      <div class="culture__step" *ngFor="let advantage of advantages; let i = index">
-        <div class="culture__step-circle">
-          <div class="culture__step-circle-number">{{ i + 1 }}</div>
-        </div>
-
-        <div class="culture__step-title">{{ advantage.title }}</div>
-
-        <div class="culture__step-text">{{ advantage.description }}</div>
-      </div>
+      <app-advantage *ngFor="let advantage of advantages; let i = index" [advantage]="advantage" [i]="i"></app-advantage>
     </div>
   </div>
 </section>
@@ -115,23 +107,7 @@
     </h3>
 
     <div class="products__grid">
-      <div class="product" *ngFor="let productCard of productCards; let i = index">
-        <div class="product__image">
-          <img [src]="'../assets/images/' + productCard.imageLink" [alt]="'Макарун ' + i" class="product__image-img">
-        </div>
-
-        <div class="product__name">{{ productCard.name }}</div>
-
-        <div class="product__lowgrid">
-          <div class="product__lowgrid-netto">
-            <div class="product__lowgrid-netto-amount">1 шт.</div>
-
-            <div class="product__lowgrid-netto-cost">{{ productCard.price }}</div>
-          </div>
-
-          <button class="btn product__lowgrid-btn" (click)="addToCart(productCard, orderSection)">Заказать</button>
-        </div>
-      </div>
+      <app-product *ngFor="let productCard of productCards;" [productCard]="productCard" (addToCardEvent)="addToCart($event)"></app-product>
     </div>
   </div>
 </section>
@@ -168,7 +144,7 @@
         </label>
       </div>
 
-      <button class="btn order__btn" (click)="createOrder()">Оформить заказ</button>
+      <button class="btn order__btn" sexyButton [sexyBtnDefaultColor]="'lightgreen'" [sexyBtnOnHoverColor]="'darkgreen'" (click)="createOrder()">Оформить заказ</button>
     </div>
 
     <div class="order__strawberry strawberry-one">
@@ -183,8 +159,9 @@
 </section>
 
 <div class="present" [style.display]="showPresent? 'flex' : 'none'">
-  <img src="./assets/images/present-fixed.png" alt="Подарок">
-  <p class="present__message">Оформите заказ и получите подарок!</p>
+  <img src="./assets/images/cart.png" alt="Подарок">
+  <p class="present__count">{{ this.cartService.count }}</p>
+  <p class="present__message">{{ this.cartService.total | currency: 'руб.':'code':'.2':'ru' }}</p>
 </div>
 
 <footer class="footer">
@@ -209,7 +186,7 @@
       </div>
     </a>
 
-    <div class="phone footer__phone">{{ shopPhoneNumber }}</div>
+    <div class="phone footer__phone">{{ shopPhoneNumber | phonePretty: 'BY' }}</div>
   </div>
 </footer>
 

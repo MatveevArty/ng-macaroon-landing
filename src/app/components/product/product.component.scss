@@ -1,0 +1,82 @@
+.products {
+  background-color: #eba8b1;
+  padding: 120px 0;
+}
+
+.products__title {
+  font-family: 'TavolgaFree', sans-serif;
+  font-size: 45px;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  text-align: center;
+}
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 259px);
+  justify-content: space-around;
+}
+
+.product {
+  width: 259px;
+  box-sizing: border-box;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 27px 21px;
+  margin-top: 143px;
+  position: relative;
+}
+
+
+.product__image {
+  position: absolute;
+  z-index: 1;
+  top: -59px;
+  left: calc(50% - 96px);
+  /*  анимация  */
+  transition: all 1s ease;
+}
+
+.product:hover .product__image {
+  transform: scale(1.15);
+}
+
+.product__name {
+  font-family: "TavolgaFree", sans-serif;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 1;
+  margin-top: 80px;
+}
+
+.product__lowgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 26px;
+}
+
+.product__lowgrid-netto {
+  font-family: 'Gilroy-Regular', sans-serif;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  text-align: start;
+}
+
+.product__lowgrid-netto-cost {
+  margin-top: 15px;
+}
+
+.product__lowgrid-btn {
+  width: 130px;
+  padding: 17px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  /* текст */
+  font-family: 'Gilroy-Bold', sans-serif;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  text-align: center;
+}

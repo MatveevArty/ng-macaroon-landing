@@ -1,0 +1,17 @@
+<div class="product">
+  <div class="product__image">
+    <img [src]="'../assets/images/' + productCard.imageLink" class="product__image-img">
+  </div>
+
+  <div class="product__name">{{ productCard.name }}</div>
+
+  <div class="product__lowgrid">
+    <div class="product__lowgrid-netto">
+      <div class="product__lowgrid-netto-amount">1 шт.</div>
+
+      <div class="product__lowgrid-netto-cost">{{ productCard.price | currency: 'руб.':'code':'.2':'ru' }}</div>
+    </div>
+
+    <button class="btn product__lowgrid-btn" sexyButton (click)="addProductToCart()">Заказать</button>
+  </div>
+</div>
